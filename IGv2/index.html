@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>RevealJS : c:\Users\nicholas.walne\OneDrive - Oxford Health NHS Foundation Trust\_dev\InformationGovernanceV2\ProjectPres.md</title>
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/black.css" id="theme">
+        
+       
+        <!-- For syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/Zenburn.css">
+
+        
+
+        <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+        <script>
+          document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+        </script>
+
+        <style type="text/css">
+            @page {    
+              margin: 0;
+              size: auto; 
+            }
+        </style>
+
+        <script>
+         if(window.location.search.match( /print-pdf-now/gi )) {
+           window.print();
+         }
+      </script>
+
+    </head>
+    <body>
+
+        <div class="reveal">
+            <div class="slides"><section  data-markdown><script type="text/template">
+# Information Governance v2
+
+<img src="https://media.giphy.com/media/TEkr9oBZ57KFmMWScZ/giphy.gif" alt="v2Cat" height="300" loop=""/>
+</script></section><section ><section data-markdown><script type="text/template">
+### Old Model
+
+<img src="https://raw.githubusercontent.com/niknudge/Resources/master/Presentations/IGv2/IGv1_Final.png" alt="v1" />
+</script></section><section data-markdown><script type="text/template">
+### New Model
+
+<img src="https://raw.githubusercontent.com/niknudge/Resources/master/Presentations/IGv2/IGv2.png" alt="v2" height="500" />
+</script></section></section><section  data-markdown><script type="text/template">
+### Proposed Changes
+
+<span class="fragment"> Removing `text` field from the fact table into a new dimension </span> <span class="fragment"> ... this can also include other properties about searches that might be needed as a requirement in the future </span>
+
+<span class="fragment"> Remove the junk dimension and move it to the fact table.</span> <span class="fragment"> ... these will be `BIT` </span>
+
+<span class="fragment"> Replace current locations with the Master Hierarchy. </span>
+</script></section><section ><section data-markdown><script type="text/template">
+### Changes to logic
+
+<img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="HackCat" width="250" loop=""/>
+</script></section><section data-markdown><script type="text/template">
+### Changes to logic
+
+#### Fact Loading
+
+Currently all of the measure values (the 1 & 0's) are calculated within the Fact Loading stored procedure.
+
+<span class="fragment">If we are having a lot of measures it will make this sproc very messy.</span>
+</script></section><section data-markdown><script type="text/template">
+### Changes to logic
+
+#### Fact Loading
+
+We should stage these measures in separate staging tables that can just be joined in the fact loading stored procedure.
+
+<span class="fragment">This will also cause less issues/conflicts with development using our new method.</span>
+</script></section></section><section ><section data-markdown><script type="text/template">
+### Changes to Reporting
+
+<img src="https://media.giphy.com/media/SxQDc2jZchCgM/giphy.gif" alt="BusinessCat" loop="" />
+</script></section><section data-markdown><script type="text/template">
+### Changes to Reporting
+
+<span class="fragment">Scrap the old stuff... We're getting __Brand new Dashboards!!!__</span>
+
+<span class="fragment">Providing more of a targeted selection of 'risky' users</span>
+
+<span class="fragment">As well as a hub to view a single user against all criteria</span>
+</script></section><section data-markdown><script type="text/template">
+### Overview Dashboard
+
+<img src="https://raw.githubusercontent.com/niknudge/Resources/master/Presentations/IGv2/Overview%20Dashboard.png" alt="overview" />
+</script></section><section data-markdown><script type="text/template">
+### Drilldown to User Detail
+
+<img src="https://raw.githubusercontent.com/niknudge/Resources/master/Presentations/IGv2/User%20Specific%20Drill%20Through.png" alt="drillthrough" />
+</script></section></section><section ><section data-markdown><script type="text/template">
+### One more thing
+
+<img src="https://media.giphy.com/media/CqVNwrLt9KEDK/giphy.gif" alt="dundunduuuun" loop="" />
+</script></section><section data-markdown><script type="text/template">
+### Would like to have
+
+Through talking to Mairin and Tina one thing that would be a nice to have would be a way to see who's been investigated before and potentially filter them out.
+
+<span class="fragment"><img src="https://raw.githubusercontent.com/niknudge/Resources/master/Presentations/IGv2/Investigated.PNG" alt="investigation" height="250" /></span>
+</script></section><section data-markdown><script type="text/template">
+### Would like to have
+
+<span class="fragment">This will obviously involve a new data stream from IG of staff investigated and when, and a fair bit of work incorportating into the model.</span>
+
+<span class="fragment">But would be very beneficial nevertheless.</span>
+</script></section></section><section ><section data-markdown><script type="text/template">
+### So...
+
+<span class="fragment">Step 1: Change Model & Add New Measures</span>
+
+<span class="fragment">Step 2: SSAS & DAX updating</span>
+
+<span class="fragment">Step 3: New Dashboards</span>
+</script></section><section data-markdown><script type="text/template">
+Step 4: <span class="fragment">Profit</span>
+
+<span class="fragment"><img src="https://media.giphy.com/media/ND6xkVPaj8tHO/giphy.gif" alt="moneyCat" loop="" /></span>
+</script></section></section></div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+            function extend() {
+              var target = {};
+              for (var i = 0; i < arguments.length; i++) {
+                var source = arguments[i];
+                for (var key in source) {
+                  if (source.hasOwnProperty(key)) {
+                    target[key] = source[key];
+                  }
+                }
+              }
+              return target;
+            }
+            // Optional libraries used to extend on reveal.js
+            var deps = [
+              { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+              { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector('[data-markdown]'); } },
+              { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+              { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+              { src: 'plugin/math/math.js', async: true }
+            ];
+            // default options to init reveal.js
+            var defaultOptions = {
+              controls: true,
+              progress: true,
+              history: true,
+              center: true,
+              transition: 'default',
+              dependencies: deps
+            };
+            // options from URL query string
+            var queryOptions = Reveal.getQueryHash() || {};
+            var options = {
+  "notesSeparator": "note:",
+  "separator": "^\\r?\\n---\\r?\\n$",
+  "verticalSeparator": "^\\r?\\n--\\r?\\n$",
+  "theme": "black",
+  "highlightTheme": "Zenburn",
+  "controls": true,
+  "progress": true,
+  "slideNumber": false,
+  "history": true,
+  "keyboard": true,
+  "overview": true,
+  "center": true,
+  "touch": true,
+  "loop": false,
+  "rtl": false,
+  "shuffle": false,
+  "fragments": true,
+  "embedded": false,
+  "help": true,
+  "showNotes": false,
+  "autoSlide": 0,
+  "autoSlideStoppable": true,
+  "mouseWheel": false,
+  "hideAddressBar": true,
+  "previewLinks": false,
+  "transition": "default",
+  "transitionSpeed": "default",
+  "backgroundTransition": "default",
+  "viewDistance": 3,
+  "parallaxBackgroundImage": "",
+  "parallaxBackgroundSize": "",
+  "parallaxBackgroundHorizontal": null,
+  "parallaxBackgroundVertical": null,
+  "title": "Information Governance v2",
+  "attributes": ""
+};
+            options = extend(defaultOptions, options, queryOptions);
+            Reveal.initialize(options);
+
+        </script>
+        
+    </body>
+</html>
