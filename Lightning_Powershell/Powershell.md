@@ -8,6 +8,7 @@ enableChalkboard: false
 enableTitleFooter: false
 enableZoom: false
 enableSearch: false
+defaultTiming: 15
 ---
 
 # Powershell
@@ -25,10 +26,8 @@ Ignite format presentation - 20 x 15sec slides that is automatic
 # What is it?
 
 note:
-Technically a programming language<br>
-Also a scripting tool<br>
-Replacement to `cmd.exe`<br>
-2 versions v0 -> v5 & v6 Core
+Language and Scripting replacement to `cmd.exe`<br>
+2 versions -> v5 & v6+ called Powershell Core
 
 ---
 
@@ -37,10 +36,8 @@ Replacement to `cmd.exe`<br>
 [Straight from Microsoft](https://docs.microsoft.com/en-us/powershell/)
 
 note:
-Powershell up to v5 comes preinstalled with Windows<br>
-Core available to download from microsoft<br>
-Can be installed side by side<br>
-Simple to install, simple to run
+Powershell comes preinstalled<br>
+Core can be found on MS website
 
 ---
 
@@ -121,19 +118,15 @@ Function     Set-VpnConnectionTriggerTrustedNetwork   2.0.0.0    VpnClient
 ```
 
 note:
-There are tonnes of inbuild commands<br>
-Use `Get-Command` to get a list<br>
-Can filter based on Verbs, or any of the headers by piping into Where-Object<br>
-Want to know other options/parameters? Use Get-Help Get-Command
-
+There are billions of inbuilt commands, use `Get-Command` to get a list<br>
+If it's too big, you can filter using parameters or by piping into other commands
 --
 
 # Want More Commands?
 
 note:
-Whilst powershell comes with literally thousands of commands out of the box<br>
-There are definitely many things that aren't included<br>
-Working with Azure, playing with VMWare, Docker, Redgate tools
+There are many things that aren't included out of box<br>
+Such as working with Azure, playing with VMWare, Docker, Redgate tools, etc...
 
 --
 
@@ -144,19 +137,6 @@ Working with Azure, playing with VMWare, Docker, Redgate tools
 note:
 The Powershell Gallery contains a massive repository of 3rd party cmdlets and functions
 Easily install using the command `Install-Module -Name ...`
-
----
-
-# Developing
-
-- Call and Response: Using the Shell
-- Full on Programming: Using the ISE or IDE
-
-note:
-The standard installation includes the shell & ISE<br>
-Shell, like a standard command line where you can write a command and a response is returned<br>
-A programming environment where you create full blown programs<br>
-There's even graphical libraries to develop GUI applications if you really want to
 
 ---
 
@@ -183,39 +163,8 @@ There's even graphical libraries to develop GUI applications if you really want 
 # Using Powershell in BI
 
 note:
-Suprise suprise! we already use some Powershell in our Department
+Suprise suprise! we already use some Powershell in our Department<br>
 These are all simple-ish scripts that are called as part of other processes.
-
---
-
-# Truecolours
-
-### Problem
-
-SSIS previously used 7zip, that wasn't compatible on live server
-
-### Solution
-
-```powershell
-> Expand-Archive Source.zip DestinationFolder
-```
-
---
-
-# ECDS
-
-### Problem
-
-ECDS needs to be exported in xml that couldn't be handled in SQL Server
-
-### Solution
-
-String Manipulation and Saving Files & `Export-Csv`
-
-note:
-SQL server has strict-ish rules with how it generates XML for example hierarchical structures are difficult to deal with<br>
-Store the building blocks in SQL and put it all together with powershell and push into a file<br>
-P&I also wanted a csv version, so used `Export-Csv` to do that too
 
 ---
 
@@ -223,71 +172,86 @@ P&I also wanted a csv version, so used `Export-Csv` to do that too
 
 ### Problem
 
-- Automate the image capture of mirror
-- Run our load processes & wait for them to finish
-- Capture the image of our 'consuming' databases
-- **and** Clean up so we don't have too many images
+All our images are based on a Masked Mirror
+
+Need to load into our 'consuming' databases (such as OxfordHealthDW) and create images when done.
+
+**AND** clean up so we don't have too many images
+
+#### All of this needs to be done in DevOps, with no human interaction
 
 note:
-Because of the masking set we use on mirror, we need to clone that first, then run out usual jobs (i.e. OxfordHealthDW). Wait for them to finish (which can take anywhere from 10mins to over an hour) and create images from these. All tagged with the same ID
+We need to create images for our databases, but using data from a masked mirror<br>
+there's a couple of scripts that help us with this
 
 --
 
 ### Solution - Pt.1
 
-`DropAndRebuildDatabases.ps1` - Cleans out data from 'consumer' databases
+```powershell
+DropAndRebuildDatabases.ps1
+```
 
-- Loops through an array of databases
-- Creates a sqlconnection to the database
-- Runs `TRUNCATE` on tables based on `INFORMATION_SCHEMA.TABLES`
-- Closes the sqlconnection
+Cleans out data from 'consumer' databases
 
 note:
-A fairly simple powershell that mainly contains SQL that could be run in SSMS<br>
-But DevOps doesn't have this ability<br>
-So instead we loop through an array of database names and generate Truncate statements against them<br>
-We need to close the connection we created at the end.
+First we need to empty out databases<br>
+This script loops through them and runs TRUNCATE TABLE against everything
 
 --
 
 ### Solution - Pt.2
 
-`SQLJobRun.ps1` & `SQLJobCheck.ps1`
+```powershell
+SQLJobRun.ps1
+```
 
-- Open up a connection to database and run a job based on a parameter fed into it
-- Once running, have a while loop to check if the job has finished
+Runs a SQL Agent Job
 
 note:
-These 2 scripts are for populating the empty databases with the masked data from Mirror<br>
-SQLJobRun.ps1 uses a parameter fed into it and kicks off the SQL agent job<br>
-SQLJobCheck.ps1 checks this job using a while loop, if the job is completed a var is changed to break the loop and a finish job command is called
+This runs a whatever SQL Agent job is fed into it
 
 --
 
 ### Solution - Pt.3
 
-`SQLJobResultsAndBuildImage.ps1`
+```powershell
+SQLJobCheck.ps1
+```
 
-- If the preceeding job has finished with a success, use Redgate Cmdlets to connect to SQL Clone server and make datebase images
-- If the job failed, flow an error flag
+Pings SQL Agent to see if job is running
 
 note:
-SQL Clone comes with a load of cmdlets to control the creation, cloning, and deleting of sql clone images<br>
-This script tests to see if the job ran was a success, if so then create an image<br>
-We also pass in the build id of the mirror image which is stored in the Azure Devops pipeline
-
+This checks the status of a job, if it's still running it'll sleep for 30 seconds, then try again
 --
 
 ### Solution - Pt.4
 
-`TrimImages.ps1`
+```powershell
+SQLJobResultsAndBuildImage.ps1
+```
 
-- Simply delete older images if the total amount of images per database is > 5
+Check last outcome of SQL Agent Job
+
+If success - create image
 
 note:
-Another nice and simple script<br>
-For each database, we order its images by creation date DESC<br>
-Then we keep the top 5 by skipping the first 5 results and deleting the rest
+SQL Clone comes with a load of cmdlets.
+This script creates images when the SQL Agent Job is sucessful
+
+--
+
+### Solution - Pt.5
+
+```powershell
+TrimImages.ps1
+```
+
+Delete anything older than last 5 images
+
+note:
+We list the images in order of newest to oldest.<br>
+Skip the first 5 and delete the rest
 
 ---
 
@@ -295,10 +259,29 @@ Then we keep the top 5 by skipping the first 5 results and deleting the rest
 
 All these scripts are used by us & can be found in:
 
-- Truecolours SSIS package
-- ECDS SQL Agent Job
 - Utils git repo (under scripts)
+
+Other scripts can be found in:
+
+- Truecolours SSIS
+- ECDS SQL Agent Job
+
+note:
+All these scripts are found in git<br>
+You can check the DevOps build pipeline to see how it fits
+
+---
 
 ### Want More?
 
 To learn more Powershell the [Microsoft Documentation is a good place to start](https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-7)
+
+note:
+Microsoft provides brilliant documentation,<br>
+failing that, Google is your friend
+
+---
+
+<img src="https://media.giphy.com/media/4BylJD2QxStzO/giphy.gif" height=400 />
+
+### Any Questions?
