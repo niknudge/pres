@@ -292,10 +292,8 @@ Ignite format presentation - 20 x 15sec slides that is automatic</aside>
             
             <h1><a id="user-content-what-is-it" class="anchor" href="#what-is-it" aria-hidden="true"></a>What is it?</h1>
 <aside class="notes">
-Technically a programming language<br>
-Also a scripting tool<br>
-Replacement to <code>cmd.exe</code><br>
-2 versions v0 -&gt; v5 &amp; v6 Core</aside>
+Language and Scripting replacement to <code>cmd.exe</code><br>
+2 versions -&gt; v5 &amp; v6+ called Powershell Core</aside>
 
             </section>
     
@@ -308,10 +306,8 @@ Replacement to <code>cmd.exe</code><br>
             <h1><a id="user-content-how-to-get-it" class="anchor" href="#how-to-get-it" aria-hidden="true"></a>How to get it</h1>
 <p><a href="https://docs.microsoft.com/en-us/powershell/">Straight from Microsoft</a></p>
 <aside class="notes">
-Powershell up to v5 comes preinstalled with Windows<br>
-Core available to download from microsoft<br>
-Can be installed side by side<br>
-Simple to install, simple to run</aside>
+Powershell comes preinstalled<br>
+Core can be found on MS website</aside>
 
             </section>
     
@@ -394,25 +390,22 @@ Function     Set-VpnConnectionTriggerDnsConfiguration 2.0.0.0    VpnClient
 Function     Set-VpnConnectionTriggerTrustedNetwork   2.0.0.0    VpnClient
 </code></pre>
 <aside class="notes">
-There are tonnes of inbuild commands<br>
-Use <code>Get-Command</code> to get a list<br>
-Can filter based on Verbs, or any of the headers by piping into Where-Object<br>
-Want to know other options/parameters? Use Get-Help Get-Command</aside>
+There are billions of inbuilt commands, use <code>Get-Command</code> to get a list<br>
+If it’s too big, you can filter using parameters or by piping into other commands</aside>
 
             </section>
         
             <section >
                 <h1><a id="user-content-want-more-commands" class="anchor" href="#want-more-commands" aria-hidden="true"></a>Want More Commands?</h1>
 <aside class="notes">
-Whilst powershell comes with literally thousands of commands out of the box<br>
-There are definitely many things that aren’t included<br>
-Working with Azure, playing with VMWare, Docker, Redgate tools</aside>
+There are many things that aren’t included out of box<br>
+Such as working with Azure, playing with VMWare, Docker, Redgate tools, etc…</aside>
 
             </section>
         
             <section >
                 <h1><a id="user-content-introducing" class="anchor" href="#introducing" aria-hidden="true"></a>Introducing…</h1>
-<p><img src="./res/powershellGallery.png" alt="Powershell Gallery"></p>
+<p><img src="res/powershellGallery.png" alt="Powershell Gallery"></p>
 <aside class="notes">
 The Powershell Gallery contains a massive repository of 3rd party cmdlets and functions
 Easily install using the command <code>Install-Module -Name ...</code></aside>
@@ -421,25 +414,6 @@ Easily install using the command <code>Install-Module -Name ...</code></aside>
         
 
     </section>
-    
-
-
-
-    
-        <section >
-            
-            <h1><a id="user-content-developing" class="anchor" href="#developing" aria-hidden="true"></a>Developing</h1>
-<ul>
-<li>Call and Response: Using the Shell</li>
-<li>Full on Programming: Using the ISE or IDE</li>
-</ul>
-<aside class="notes">
-The standard installation includes the shell &amp; ISE<br>
-Shell, like a standard command line where you can write a command and a response is returned<br>
-A programming environment where you create full blown programs<br>
-There’s even graphical libraries to develop GUI applications if you really want to</aside>
-
-            </section>
     
 
 
@@ -478,40 +452,14 @@ There’s even graphical libraries to develop GUI applications if you really wan
 
 
     
-    <section>
         <section >
+            
             <h1><a id="user-content-using-powershell-in-bi" class="anchor" href="#using-powershell-in-bi" aria-hidden="true"></a>Using Powershell in BI</h1>
 <aside class="notes">
-Suprise suprise! we already use some Powershell in our Department
+Suprise suprise! we already use some Powershell in our Department<br>
 These are all simple-ish scripts that are called as part of other processes.</aside>
 
             </section>
-        
-            <section >
-                <h1><a id="user-content-truecolours" class="anchor" href="#truecolours" aria-hidden="true"></a>Truecolours</h1>
-<h3><a id="user-content-problem" class="anchor" href="#problem" aria-hidden="true"></a>Problem</h3>
-<p>SSIS previously used 7zip, that wasn’t compatible on live server</p>
-<h3><a id="user-content-solution" class="anchor" href="#solution" aria-hidden="true"></a>Solution</h3>
-<pre><code class="language-powershell">&gt; Expand-Archive Source.zip DestinationFolder
-</code></pre>
-
-            </section>
-        
-            <section >
-                <h1><a id="user-content-ecds" class="anchor" href="#ecds" aria-hidden="true"></a>ECDS</h1>
-<h3><a id="user-content-problem-1" class="anchor" href="#problem-1" aria-hidden="true"></a>Problem</h3>
-<p>ECDS needs to be exported in xml that couldn’t be handled in SQL Server</p>
-<h3><a id="user-content-solution-1" class="anchor" href="#solution-1" aria-hidden="true"></a>Solution</h3>
-<p>String Manipulation and Saving Files &amp; <code>Export-Csv</code></p>
-<aside class="notes">
-SQL server has strict-ish rules with how it generates XML for example hierarchical structures are difficult to deal with<br>
-Store the building blocks in SQL and put it all together with powershell and push into a file<br>
-P&amp;I also wanted a csv version, so used <code>Export-Csv</code> to do that too</aside>
-
-            </section>
-        
-
-    </section>
     
 
 
@@ -520,73 +468,68 @@ P&amp;I also wanted a csv version, so used <code>Export-Csv</code> to do that to
     <section>
         <section >
             <h1><a id="user-content-azure-dev-ops" class="anchor" href="#azure-dev-ops" aria-hidden="true"></a>Azure Dev Ops</h1>
-<h3><a id="user-content-problem-2" class="anchor" href="#problem-2" aria-hidden="true"></a>Problem</h3>
-<ul>
-<li>Automate the image capture of mirror</li>
-<li>Run our load processes &amp; wait for them to finish</li>
-<li>Capture the image of our ‘consuming’ databases</li>
-<li><strong>and</strong> Clean up so we don’t have too many images</li>
-</ul>
+<h3><a id="user-content-problem" class="anchor" href="#problem" aria-hidden="true"></a>Problem</h3>
+<p>All our images are based on a Masked Mirror</p>
+<p>Need to load into our ‘consuming’ databases (such as OxfordHealthDW) and create images when done.</p>
+<p><strong>AND</strong> clean up so we don’t have too many images</p>
+<h4><a id="user-content-all-of-this-needs-to-be-done-in-devops-with-no-human-interaction" class="anchor" href="#all-of-this-needs-to-be-done-in-devops-with-no-human-interaction" aria-hidden="true"></a>All of this needs to be done in DevOps, with no human interaction</h4>
 <aside class="notes">
-Because of the masking set we use on mirror, we need to clone that first, then run out usual jobs (i.e. OxfordHealthDW). Wait for them to finish (which can take anywhere from 10mins to over an hour) and create images from these. All tagged with the same ID</aside>
+We need to create images for our databases, but using data from a masked mirror<br>
+there’s a couple of scripts that help us with this</aside>
 
             </section>
         
             <section >
                 <h3><a id="user-content-solution---pt1" class="anchor" href="#solution---pt1" aria-hidden="true"></a>Solution - Pt.1</h3>
-<p><code>DropAndRebuildDatabases.ps1</code> - Cleans out data from ‘consumer’ databases</p>
-<ul>
-<li>Loops through an array of databases</li>
-<li>Creates a sqlconnection to the database</li>
-<li>Runs <code>TRUNCATE</code> on tables based on <code>INFORMATION_SCHEMA.TABLES</code></li>
-<li>Closes the sqlconnection</li>
-</ul>
+<pre><code class="language-powershell">DropAndRebuildDatabases.ps1
+</code></pre>
+<p>Cleans out data from ‘consumer’ databases</p>
 <aside class="notes">
-A fairly simple powershell that mainly contains SQL that could be run in SSMS<br>
-But DevOps doesn’t have this ability<br>
-So instead we loop through an array of database names and generate Truncate statements against them<br>
-We need to close the connection we created at the end.</aside>
+First we need to empty out databases<br>
+This script loops through them and runs TRUNCATE TABLE against everything</aside>
 
             </section>
         
             <section >
                 <h3><a id="user-content-solution---pt2" class="anchor" href="#solution---pt2" aria-hidden="true"></a>Solution - Pt.2</h3>
-<p><code>SQLJobRun.ps1</code> &amp; <code>SQLJobCheck.ps1</code></p>
-<ul>
-<li>Open up a connection to database and run a job based on a parameter fed into it</li>
-<li>Once running, have a while loop to check if the job has finished</li>
-</ul>
+<pre><code class="language-powershell">SQLJobRun.ps1
+</code></pre>
+<p>Runs a SQL Agent Job</p>
 <aside class="notes">
-These 2 scripts are for populating the empty databases with the masked data from Mirror<br>
-SQLJobRun.ps1 uses a parameter fed into it and kicks off the SQL agent job<br>
-SQLJobCheck.ps1 checks this job using a while loop, if the job is completed a var is changed to break the loop and a finish job command is called</aside>
+This runs a whatever SQL Agent job is fed into it</aside>
 
             </section>
         
             <section >
                 <h3><a id="user-content-solution---pt3" class="anchor" href="#solution---pt3" aria-hidden="true"></a>Solution - Pt.3</h3>
-<p><code>SQLJobResultsAndBuildImage.ps1</code></p>
-<ul>
-<li>If the preceeding job has finished with a success, use Redgate Cmdlets to connect to SQL Clone server and make datebase images</li>
-<li>If the job failed, flow an error flag</li>
-</ul>
+<pre><code class="language-powershell">SQLJobCheck.ps1
+</code></pre>
+<p>Pings SQL Agent to see if job is running</p>
 <aside class="notes">
-SQL Clone comes with a load of cmdlets to control the creation, cloning, and deleting of sql clone images<br>
-This script tests to see if the job ran was a success, if so then create an image<br>
-We also pass in the build id of the mirror image which is stored in the Azure Devops pipeline</aside>
+This checks the status of a job, if it’s still running it’ll sleep for 30 seconds, then try again</aside>
 
             </section>
         
             <section >
                 <h3><a id="user-content-solution---pt4" class="anchor" href="#solution---pt4" aria-hidden="true"></a>Solution - Pt.4</h3>
-<p><code>TrimImages.ps1</code></p>
-<ul>
-<li>Simply delete older images if the total amount of images per database is &gt; 5</li>
-</ul>
+<pre><code class="language-powershell">SQLJobResultsAndBuildImage.ps1
+</code></pre>
+<p>Check last outcome of SQL Agent Job</p>
+<p>If success - create image</p>
 <aside class="notes">
-Another nice and simple script<br>
-For each database, we order its images by creation date DESC<br>
-Then we keep the top 5 by skipping the first 5 results and deleting the rest</aside>
+SQL Clone comes with a load of cmdlets.
+This script creates images when the SQL Agent Job is sucessful</aside>
+
+            </section>
+        
+            <section >
+                <h3><a id="user-content-solution---pt5" class="anchor" href="#solution---pt5" aria-hidden="true"></a>Solution - Pt.5</h3>
+<pre><code class="language-powershell">TrimImages.ps1
+</code></pre>
+<p>Delete anything older than last 5 images</p>
+<aside class="notes">
+We list the images in order of newest to oldest.<br>
+Skip the first 5 and delete the rest</aside>
 
             </section>
         
@@ -602,12 +545,41 @@ Then we keep the top 5 by skipping the first 5 results and deleting the rest</as
             <h3><a id="user-content-wrap-up" class="anchor" href="#wrap-up" aria-hidden="true"></a>Wrap up</h3>
 <p>All these scripts are used by us &amp; can be found in:</p>
 <ul>
-<li>Truecolours SSIS package</li>
-<li>ECDS SQL Agent Job</li>
 <li>Utils git repo (under scripts)</li>
 </ul>
-<h3><a id="user-content-want-more" class="anchor" href="#want-more" aria-hidden="true"></a>Want More?</h3>
+<p>Other scripts can be found in:</p>
+<ul>
+<li>Truecolours SSIS</li>
+<li>ECDS SQL Agent Job</li>
+</ul>
+<aside class="notes">
+All these scripts are found in git<br>
+You can check the DevOps build pipeline to see how it fits</aside>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3><a id="user-content-want-more" class="anchor" href="#want-more" aria-hidden="true"></a>Want More?</h3>
 <p>To learn more Powershell the <a href="https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-7">Microsoft Documentation is a good place to start</a></p>
+<aside class="notes">
+Microsoft provides brilliant documentation,<br>
+failing that, Google is your friend</aside>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <img src="https://media.giphy.com/media/4BylJD2QxStzO/giphy.gif" height=400 />
+<p>Any Questions?</p>
 
             </section>
     
@@ -649,7 +621,7 @@ Then we keep the top 5 by skipping the first 5 results and deleting the rest</as
         autoSlide: 15000,
         autoSlideStoppable: true,
         autoSlideMethod: Reveal.navigateNext,
-        defaultTiming: 120,
+        defaultTiming: 15,
         mouseWheel: false,
         hideAddressBar: true,
         previewLinks: false,

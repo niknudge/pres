@@ -132,7 +132,7 @@ Such as working with Azure, playing with VMWare, Docker, Redgate tools, etc...
 
 # Introducing...
 
-![Powershell Gallery](./res/powershellGallery.png)
+![Powershell Gallery](res/powershellGallery.png)
 
 note:
 The Powershell Gallery contains a massive repository of 3rd party cmdlets and functions
@@ -284,4 +284,4 @@ failing that, Google is your friend
 
 <img src="https://media.giphy.com/media/4BylJD2QxStzO/giphy.gif" height=400 />
 
-### Any Questions?
+Any Questions?
