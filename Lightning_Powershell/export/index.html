@@ -1,0 +1,868 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>pwsh.exe</title>
+
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <!-- REVEAL CSS-->
+  <link rel="stylesheet" href="libs/reveal.js/font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="libs/reveal.js/3.8.0/css/reveal.css">
+  
+  <link rel="stylesheet" href="libs/reveal.js/3.8.0/css/theme/moon.css" id="theme">
+  
+  
+  <link rel="stylesheet" href="libs/reveal.js/3.8.0/plugin/title-footer/title-footer-mod.css" />
+
+  <!-- MERMAID-->
+  <script src="libs/reveal.js/3.8.0/plugin/mermaid/mermaid.min.js"></script>
+  <style>
+  .mermaid {
+    font-size: 0.5em;
+  }
+  </style>
+
+  <style>
+    [class*=task-list-item] {
+    min-height: 22px;
+    margin-top: 6px!important;
+    margin-bottom: 6px!important;
+    padding-left: 0;
+    list-style: none;
+}
+
+[class*=task-list-item]>input:first-child {
+    position: absolute!important;
+    opacity: 0;
+    margin: 0;
+}
+[class*=task-list-item]>label {
+    padding-left: 29px!important;
+    min-height: 22px;
+    line-height: 22px;
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    margin-bottom: 0;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.task-list-item>input:first-child:checked+input[type=hidden]+label::before, .task-list-item>input:first-child:checked+label::before {
+    background-color: #ecf0f1;
+    border-color: #ecf0f1;
+}
+
+[class*=task-list-item]>input:first-child+input[type=hidden]+label::before, [class*=task-list-item]>input:first-child+label::before {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border: 1px solid #D3CFC8;
+    border-radius: 0;
+    margin-left: -29px;
+}
+
+
+[class*=task-list-item]>input:first-child:checked+input[type=hidden]+label::after, [class*=task-list-item]>input:first-child:checked+label::after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 7px;
+    height: 10px;
+    border: 2px solid #fff;
+    border-left: none;
+    border-top: none;
+    transform: translate(7.75px,4.5px) rotate(45deg);
+    -ms-transform: translate(7.75px,4.5px) rotate(45deg);
+}
+
+
+.task-list-item>input:first-child:checked+input[type=hidden]+label::after, .task-list-item>input:first-child:checked+label::after {
+    border-bottom-color: #95a5a6;
+    border-right-color: #95a5a6;
+}
+  </style>
+
+  <!-- Theme used for syntax highlighting of code -->
+  
+  <link rel="stylesheet" href="libs/highlight.js/9.12.0/Atom One Dark.css">
+  
+
+  
+  
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? 'libs/reveal.js/3.8.0/css/print/pdf.css' : 'libs/reveal.js/3.8.0/css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+
+  <style>
+    /* Solarized Light theme */
+     .line {
+      display: block;
+    }
+    
+
+    .line.focus {
+      background: #fdf6e3;
+      color: #657b83;
+    }
+
+/*
+    .line.focus .hljs-comment,
+    .line.focus .hljs-quote {
+      color: #93a1a1;
+    }
+
+    .line.focus .hljs-keyword,
+    .line.focus .hljs-selector-tag,
+    .line.focus .hljs-addition {
+      color: #859900;
+    }
+
+    .line.focus .hljs-number,
+    .line.focus .hljs-string,
+    .line.focus .hljs-meta .hljs-meta-string,
+    .line.focus .hljs-literal,
+    .line.focus .hljs-doctag,
+    .line.focus .hljs-regexp {
+      color: #2aa198;
+    }
+
+    .line.focus .hljs-title,
+    .line.focus .hljs-section,
+    .line.focus .hljs-name,
+    .line.focus .hljs-selector-id,
+    .line.focus .hljs-selector-class {
+      color: #268bd2;
+    }
+
+    .line.focus .hljs-attribute,
+    .line.focus .hljs-attr,
+    .line.focus .hljs-variable,
+    .line.focus .hljs-template-variable,
+    .line.focus .hljs-class .hljs-title,
+    .line.focus .hljs-type {
+      color: #b58900;
+    }
+
+    .line.focus .hljs-symbol,
+    .line.focus .hljs-bullet,
+    .line.focus .hljs-subst,
+    .line.focus .hljs-meta,
+    .line.focus .hljs-meta .hljs-keyword,
+    .line.focus .hljs-selector-attr,
+    .line.focus .hljs-selector-pseudo,
+    .line.focus .hljs-link {
+      color: #cb4b16;
+    }
+
+    .line.focus .hljs-built_in,
+    .line.focus .hljs-deletion {
+      color: #dc322f;
+    }
+
+    .line.focus .hljs-formula {
+      background: #eee8d5;
+    }
+
+    .line.focus .hljs-emphasis {
+      font-style: italic;
+    }
+
+    .line.focus .hljs-strong {
+      font-weight: bold;
+    }
+
+    .yellow-slide .line.focus:nth-child(2) {
+      background: yellow;
+    }
+
+    .reveal .slides section .code-presenting-annotation {
+      font-size: 70%;
+    }
+    */
+
+    .reveal .slides section .fragment.current-only {
+      visibility: visible;
+      display: none;
+    }
+
+    .reveal .slides section .fragment.current-only.current-fragment {
+      display: block;
+    }
+
+/*
+    .line {
+      display: block;
+    }
+*/
+    .line.focus {
+       opacity: 1.0;
+    } 
+
+    /* .hljs {
+      background: none;
+    } */
+
+    /* .reveal pre {
+      width: 98%;
+      margin: 0px;
+      box-shadow: none;
+    }
+
+    .reveal pre code {
+      font-size: 1.2em;
+      line-height: 1.2;
+      border-radius: 10px;
+      max-height: 60vh !important;
+      overflow: hidden !important;
+    } */
+
+    @media (device-width: 100vw) and (device-height: 100vh) {
+      .reveal pre code {
+        max-height: 50vh !important;
+      }
+    }
+
+    #logo img {
+      max-height: 3.5em;
+      max-width: none;
+      min-width: 50px;
+    }
+
+    .reveal .slides section .code-presenting-annotation {
+      color: white;
+      background: black;
+      padding: 0px 15px;
+      border-radius: 15px;
+      opacity: 0.75 !important;
+      font-size: 50% !important;
+    }
+  </style>
+  <script>
+    if (window.location.search.match(/print-pdf-now/gi)) {
+      window.print();
+    }
+  </script>
+</head>
+
+<body>
+  
+
+  <div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+      
+
+
+    
+        <section >
+            
+            <h1><a id="user-content-powershell" class="anchor" href="#powershell" aria-hidden="true"></a>Powershell</h1>
+<h2><a id="user-content--or-how-the-cool-people-say-it" class="anchor" href="#-or-how-the-cool-people-say-it" aria-hidden="true"></a>… Or How the Cool People Say It</h2>
+<p><code>pwsh.exe</code></p>
+<aside class="notes">
+Quick 5 min presentation on what it is and how to use it<br>
+Ignite format presentation - 20 x 15sec slides that is automatic</aside>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h1><a id="user-content-what-is-it" class="anchor" href="#what-is-it" aria-hidden="true"></a>What is it?</h1>
+<aside class="notes">
+Technically a programming language<br>
+Also a scripting tool<br>
+Replacement to <code>cmd.exe</code><br>
+2 versions v0 -&gt; v5 &amp; v6 Core</aside>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h1><a id="user-content-how-to-get-it" class="anchor" href="#how-to-get-it" aria-hidden="true"></a>How to get it</h1>
+<p><a href="https://docs.microsoft.com/en-us/powershell/">Straight from Microsoft</a></p>
+<aside class="notes">
+Powershell up to v5 comes preinstalled with Windows<br>
+Core available to download from microsoft<br>
+Can be installed side by side<br>
+Simple to install, simple to run</aside>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h1><a id="user-content-how-to---flow" class="anchor" href="#how-to---flow" aria-hidden="true"></a>How to - Flow</h1>
+<p>Everything that any programming language can do!</p>
+<ul>
+<li>Variables</li>
+<li>Conditionals</li>
+<li>Looping</li>
+<li>Object Oriented &amp; Functional Programming Paradigms</li>
+</ul>
+<aside class="notes">
+Powershell has all of the features that any language has<br>
+As it’s a modern language it has asynchronous functions out of the box.</aside>
+
+            </section>
+    
+
+
+
+    
+    <section>
+        <section >
+            <h1><a id="user-content-how-to---cmdlet" class="anchor" href="#how-to---cmdlet" aria-hidden="true"></a>How to - Cmdlet</h1>
+<pre><code class="language-powershell">&gt; [Verb]-[Noun] descriptors [-parameter]
+
+&gt; Get-Date
+20 February 2020 20:35:40
+
+&gt; Get-Help Get-Date
+NAME
+    Get-Date
+
+SYNTAX
+    Get-Date [[-Date] &lt;datetime&gt;] [-Year &lt;int&gt;] [-Month &lt;int&gt;] 
+    [-Day &lt;int&gt;] [-Hour &lt;int&gt;] [-Minute &lt;int&gt;] [-Second &lt;int&gt;] 
+    [-Millisecond &lt;int&gt;] [-DisplayHint {Date | Time | DateTime}] 
+    [-Format &lt;string&gt;]  [&lt;CommonParameters&gt;] ...
+</code></pre>
+<aside class="notes">
+Alongside the standard programming flow there are cmdlets<br>
+These are built up on Verb-Noun commands<br>
+If in need of any help… use <code>Get-Help</code></aside>
+
+            </section>
+        
+            <section >
+                <h1><a id="user-content-verbs" class="anchor" href="#verbs" aria-hidden="true"></a>Verbs</h1>
+<pre><code class="language-powershell">&gt; Get-Verb
+</code></pre>
+<p>Most commonly used include <code>Get</code>, <code>Set</code>, <code>Remove</code>, &amp; <code>New</code></p>
+<p>These verbs are <a href="https://docs.microsoft.com/en-us/powershell/scripting/developer/cmdlet/approved-verbs-for-windows-powershell-commands?view=powershell-7#common-verbs">enforced by Microsoft</a>, even for custom made add ons.</p>
+<aside class="notes">
+All verbs can be found using the simple expression <code>Get-Verb</code><br>
+Further details can be found using the link here<br></aside>
+
+            </section>
+        
+            <section >
+                <h1><a id="user-content-commands" class="anchor" href="#commands" aria-hidden="true"></a>Commands</h1>
+<pre><code class="language-powershell">&gt; Get-Command
+MASSIVE LIST
+
+&gt; Get-Command -Verb Set
+SLIGHTLY SMALLER LIST
+
+&gt; Get-Command -Verb Set | Where-Object Source -match VpnClient
+CommandType  Name                                     Version    Source
+-----------  ----                                     -------    ------
+Function     Set-VpnConnection                        2.0.0.0    VpnClient
+Function     Set-VpnConnectionIPsecConfiguration      2.0.0.0    VpnClient
+Function     Set-VpnConnectionProxy                   2.0.0.0    VpnClient
+Function     Set-VpnConnectionTriggerDnsConfiguration 2.0.0.0    VpnClient
+Function     Set-VpnConnectionTriggerTrustedNetwork   2.0.0.0    VpnClient
+</code></pre>
+<aside class="notes">
+There are tonnes of inbuild commands<br>
+Use <code>Get-Command</code> to get a list<br>
+Can filter based on Verbs, or any of the headers by piping into Where-Object<br>
+Want to know other options/parameters? Use Get-Help Get-Command</aside>
+
+            </section>
+        
+            <section >
+                <h1><a id="user-content-want-more-commands" class="anchor" href="#want-more-commands" aria-hidden="true"></a>Want More Commands?</h1>
+<aside class="notes">
+Whilst powershell comes with literally thousands of commands out of the box<br>
+There are definitely many things that aren’t included<br>
+Working with Azure, playing with VMWare, Docker, Redgate tools</aside>
+
+            </section>
+        
+            <section >
+                <h1><a id="user-content-introducing" class="anchor" href="#introducing" aria-hidden="true"></a>Introducing…</h1>
+<p><img src="./res/powershellGallery.png" alt="Powershell Gallery"></p>
+<aside class="notes">
+The Powershell Gallery contains a massive repository of 3rd party cmdlets and functions
+Easily install using the command <code>Install-Module -Name ...</code></aside>
+
+            </section>
+        
+
+    </section>
+    
+
+
+
+    
+        <section >
+            
+            <h1><a id="user-content-developing" class="anchor" href="#developing" aria-hidden="true"></a>Developing</h1>
+<ul>
+<li>Call and Response: Using the Shell</li>
+<li>Full on Programming: Using the ISE or IDE</li>
+</ul>
+<aside class="notes">
+The standard installation includes the shell &amp; ISE<br>
+Shell, like a standard command line where you can write a command and a response is returned<br>
+A programming environment where you create full blown programs<br>
+There’s even graphical libraries to develop GUI applications if you really want to</aside>
+
+            </section>
+    
+
+
+
+    
+    <section>
+        <section >
+            <h3><a id="user-content-quick-summary" class="anchor" href="#quick-summary" aria-hidden="true"></a>Quick Summary</h3>
+<ul>
+<li>Powershell both a scripting &amp; programming lang</li>
+<li>2 Types
+<ul>
+<li>Powershell up to v5 (Windows only)</li>
+<li>Powershell Core v6+ (Cross Platform &amp; Open Source)</li>
+</ul>
+</li>
+<li>All the basic features of programming lang</li>
+<li>Extendable with Cmdlets</li>
+<li>[Verb]-[Noun] for ease of use</li>
+<li>Already tonnes of Cmdlets out of the box</li>
+<li>Not enough? There’s the Powershell Gallery</li>
+</ul>
+
+            </section>
+        
+            <section >
+                <h3><a id="user-content-quick-water-break" class="anchor" href="#quick-water-break" aria-hidden="true"></a>Quick Water Break</h3>
+<p><img src="https://media.giphy.com/media/WZzVrua0dhW5q/giphy.gif" alt="Hydro Kitty"></p>
+
+            </section>
+        
+
+    </section>
+    
+
+
+
+    
+    <section>
+        <section >
+            <h1><a id="user-content-using-powershell-in-bi" class="anchor" href="#using-powershell-in-bi" aria-hidden="true"></a>Using Powershell in BI</h1>
+<aside class="notes">
+Suprise suprise! we already use some Powershell in our Department
+These are all simple-ish scripts that are called as part of other processes.</aside>
+
+            </section>
+        
+            <section >
+                <h1><a id="user-content-truecolours" class="anchor" href="#truecolours" aria-hidden="true"></a>Truecolours</h1>
+<h3><a id="user-content-problem" class="anchor" href="#problem" aria-hidden="true"></a>Problem</h3>
+<p>SSIS previously used 7zip, that wasn’t compatible on live server</p>
+<h3><a id="user-content-solution" class="anchor" href="#solution" aria-hidden="true"></a>Solution</h3>
+<pre><code class="language-powershell">&gt; Expand-Archive Source.zip DestinationFolder
+</code></pre>
+
+            </section>
+        
+            <section >
+                <h1><a id="user-content-ecds" class="anchor" href="#ecds" aria-hidden="true"></a>ECDS</h1>
+<h3><a id="user-content-problem-1" class="anchor" href="#problem-1" aria-hidden="true"></a>Problem</h3>
+<p>ECDS needs to be exported in xml that couldn’t be handled in SQL Server</p>
+<h3><a id="user-content-solution-1" class="anchor" href="#solution-1" aria-hidden="true"></a>Solution</h3>
+<p>String Manipulation and Saving Files &amp; <code>Export-Csv</code></p>
+<aside class="notes">
+SQL server has strict-ish rules with how it generates XML for example hierarchical structures are difficult to deal with<br>
+Store the building blocks in SQL and put it all together with powershell and push into a file<br>
+P&amp;I also wanted a csv version, so used <code>Export-Csv</code> to do that too</aside>
+
+            </section>
+        
+
+    </section>
+    
+
+
+
+    
+    <section>
+        <section >
+            <h1><a id="user-content-azure-dev-ops" class="anchor" href="#azure-dev-ops" aria-hidden="true"></a>Azure Dev Ops</h1>
+<h3><a id="user-content-problem-2" class="anchor" href="#problem-2" aria-hidden="true"></a>Problem</h3>
+<ul>
+<li>Automate the image capture of mirror</li>
+<li>Run our load processes &amp; wait for them to finish</li>
+<li>Capture the image of our ‘consuming’ databases</li>
+<li><strong>and</strong> Clean up so we don’t have too many images</li>
+</ul>
+<aside class="notes">
+Because of the masking set we use on mirror, we need to clone that first, then run out usual jobs (i.e. OxfordHealthDW). Wait for them to finish (which can take anywhere from 10mins to over an hour) and create images from these. All tagged with the same ID</aside>
+
+            </section>
+        
+            <section >
+                <h3><a id="user-content-solution---pt1" class="anchor" href="#solution---pt1" aria-hidden="true"></a>Solution - Pt.1</h3>
+<p><code>DropAndRebuildDatabases.ps1</code> - Cleans out data from ‘consumer’ databases</p>
+<ul>
+<li>Loops through an array of databases</li>
+<li>Creates a sqlconnection to the database</li>
+<li>Runs <code>TRUNCATE</code> on tables based on <code>INFORMATION_SCHEMA.TABLES</code></li>
+<li>Closes the sqlconnection</li>
+</ul>
+<aside class="notes">
+A fairly simple powershell that mainly contains SQL that could be run in SSMS<br>
+But DevOps doesn’t have this ability<br>
+So instead we loop through an array of database names and generate Truncate statements against them<br>
+We need to close the connection we created at the end.</aside>
+
+            </section>
+        
+            <section >
+                <h3><a id="user-content-solution---pt2" class="anchor" href="#solution---pt2" aria-hidden="true"></a>Solution - Pt.2</h3>
+<p><code>SQLJobRun.ps1</code> &amp; <code>SQLJobCheck.ps1</code></p>
+<ul>
+<li>Open up a connection to database and run a job based on a parameter fed into it</li>
+<li>Once running, have a while loop to check if the job has finished</li>
+</ul>
+<aside class="notes">
+These 2 scripts are for populating the empty databases with the masked data from Mirror<br>
+SQLJobRun.ps1 uses a parameter fed into it and kicks off the SQL agent job<br>
+SQLJobCheck.ps1 checks this job using a while loop, if the job is completed a var is changed to break the loop and a finish job command is called</aside>
+
+            </section>
+        
+            <section >
+                <h3><a id="user-content-solution---pt3" class="anchor" href="#solution---pt3" aria-hidden="true"></a>Solution - Pt.3</h3>
+<p><code>SQLJobResultsAndBuildImage.ps1</code></p>
+<ul>
+<li>If the preceeding job has finished with a success, use Redgate Cmdlets to connect to SQL Clone server and make datebase images</li>
+<li>If the job failed, flow an error flag</li>
+</ul>
+<aside class="notes">
+SQL Clone comes with a load of cmdlets to control the creation, cloning, and deleting of sql clone images<br>
+This script tests to see if the job ran was a success, if so then create an image<br>
+We also pass in the build id of the mirror image which is stored in the Azure Devops pipeline</aside>
+
+            </section>
+        
+            <section >
+                <h3><a id="user-content-solution---pt4" class="anchor" href="#solution---pt4" aria-hidden="true"></a>Solution - Pt.4</h3>
+<p><code>TrimImages.ps1</code></p>
+<ul>
+<li>Simply delete older images if the total amount of images per database is &gt; 5</li>
+</ul>
+<aside class="notes">
+Another nice and simple script<br>
+For each database, we order its images by creation date DESC<br>
+Then we keep the top 5 by skipping the first 5 results and deleting the rest</aside>
+
+            </section>
+        
+
+    </section>
+    
+
+
+
+    
+        <section >
+            
+            <h3><a id="user-content-wrap-up" class="anchor" href="#wrap-up" aria-hidden="true"></a>Wrap up</h3>
+<p>All these scripts are used by us &amp; can be found in:</p>
+<ul>
+<li>Truecolours SSIS package</li>
+<li>ECDS SQL Agent Job</li>
+<li>Utils git repo (under scripts)</li>
+</ul>
+<h3><a id="user-content-want-more" class="anchor" href="#want-more" aria-hidden="true"></a>Want More?</h3>
+<p>To learn more Powershell the <a href="https://docs.microsoft.com/en-us/powershell/scripting/overview?view=powershell-7">Microsoft Documentation is a good place to start</a></p>
+
+            </section>
+    
+
+
+    </div>
+
+
+  </div>
+
+  <script src="libs/reveal.js/3.8.0/lib/js/head.min.js"></script>
+  <script src="libs/reveal.js/3.8.0/js/reveal.js"></script>
+
+  <script>
+
+    // More info https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+
+        controls: true,
+        controlsTutorial: true,
+        controlsLayout: 'bottom-right',
+        controlsBackArrows: 'faded',
+        progress: true,
+        slideNumber: false,
+        history: true,
+        keyboard: true,
+        overview: true,
+        center: true,
+        touch: true,
+        loop: false,
+        rtl: false,
+        shuffle: false,
+        fragments: true,
+        fragmentInURL: false,
+        embedded: false,
+        help: true,
+        showNotes: false,
+        autoPlayMedia: false,
+        autoSlide: 15000,
+        autoSlideStoppable: true,
+        autoSlideMethod: Reveal.navigateNext,
+        defaultTiming: 120,
+        mouseWheel: false,
+        hideAddressBar: true,
+        previewLinks: false,
+        transition: 'slide',
+        transitionSpeed: 'default',
+        backgroundTransition: 'default',
+        viewDistance: 3,
+        parallaxBackgroundImage: '',
+        parallaxBackgroundSize: '',
+        parallaxBackgroundHorizontal: 0,
+        parallaxBackgroundVertical: 0,
+        display: 'block',
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+            // { src: 'libs/reveal.js/3.8.0/lib/js/classList.js', condition: function () { return !document.body.classList; } },
+            // { src: 'libs/reveal.js/3.8.0/plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+            // { src: 'libs/reveal.js/3.8.0/plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+            // { src: 'libs/reveal.js/3.8.0/plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+            { src: 'libs/reveal.js/3.8.0/plugin/notes/notes.js', async: true },
+            { src: 'libs/reveal.js/3.8.0/plugin/chart/Chart.min.js' },
+            { src: 'libs/reveal.js/3.8.0/plugin/chart/csv2chart.js' },
+            { src: 'libs/reveal.js/3.8.0/plugin/embed-tweet/embed-tweet.js' },
+            { src: 'libs/reveal.js/3.8.0/plugin/math/math.js', async: true },
+            { src: 'libs/highlight.js/9.12.0/highlight.js', async: true },
+            { src: 'libs/reveal.js/3.8.0/plugin/anything/anything.js' },
+            { src: 'libs/reveal.js/3.8.0/plugin/mermaid/mermaid.min.js', async: true, callback: function() {mermaid.initialize({startOnLoad:false})} },	
+
+           
+
+           
+
+            
+
+            
+
+            
+
+        {
+            src: 'libs/highlight.js/9.12.0/reveal-code-focus-1.0.0-mod.js',
+            async: true,
+            callback: function () {
+                RevealCodeFocus();
+            }
+        },
+            // { src: 'libs/reveal.js/3.8.0/plugin/reveal-code-focus/highlight.pack.js' },
+            // { src: 'libs/reveal.js/3.8.0/plugin/reveal-code-focus/reveal-code-focus.js', async: true, callback: function() { RevealCodeFocus(); } },
+           // {src: 'libs/reveal.js/3.8.0/plugin/line-numbers/line-numbers.js'}
+        ]
+        ,
+    keyboard: {
+        67: function () { RevealChalkboard.toggleNotesCanvas() },	// toggle notes canvas when 'c' is pressed
+        66: function () { RevealChalkboard.toggleChalkboard() },	// toggle chalkboard when 'b' is pressed
+        46: function () { RevealChalkboard.clear() },	// clear chalkboard when 'DEL' is pressed
+        8: function () { RevealChalkboard.reset() },	// reset chalkboard data on current slide when 'BACKSPACE' is pressed
+        68: function () { RevealChalkboard.download() },	// downlad recorded chalkboard drawing when 'd' is pressed
+    },
+    math: {
+       // mathjax: 'libs/reveal.js/3.8.0/plugin/math/MathJax.js',
+             mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+            config: 'TeX-AMS_HTML-full'
+    },
+    chart: {
+        defaults: {
+            global: {
+                title: { fontColor: "#FFF" },
+                legend: {
+                    position: "bottom",
+                        labels: { fontColor: "#FFF" },
+                },
+                tooltips: {
+                    labels: { fontColor: "#FFF" },
+                },
+            },
+            scale: {
+                scaleLabel: { fontColor: "#FFF" },
+                gridLines: { color: "#FFF", zeroLineColor: "#FFF" },
+                ticks: { fontColor: "#FFF" },
+            }
+        },
+        line: { borderColor: ["rgba(20,220,220,.8)", "rgba(220,120,120,.8)", "rgba(20,120,220,.8)"], "borderDash": [[5, 10], [0, 0]] },
+        bar: { backgroundColor: ["rgba(20,220,220,.8)", "rgba(220,120,120,.8)", "rgba(20,120,220,.8)"] },
+        pie: { backgroundColor: [["rgba(0,0,0,.8)", "rgba(220,20,20,.8)", "rgba(20,220,20,.8)", "rgba(220,220,20,.8)", "rgba(20,20,220,.8)"]] },
+        radar: { borderColor: ["rgba(20,220,220,.8)", "rgba(220,120,120,.8)", "rgba(20,120,220,.8)"] },
+    },
+    anything: [ 
+	 {
+	  className: "mermaid"
+	 },
+	 // ...
+	],
+    menu: {
+        // Specifies which side of the presentation the menu will 
+        // be shown. Use 'left' or 'right'.
+        side: 'left',
+
+            // Specifies the width of the menu.
+            // Can be one of the following:
+            // 'normal', 'wide', 'third', 'half', 'full', or
+            // any valid css length value
+            width: 'normal',
+
+                // Add slide numbers to the titles in the slide list.
+                // Use 'true' or format string (same as reveal.js slide numbers)
+                numbers: false,
+
+                    // Specifies which slide elements will be used for generating
+                    // the slide titles in the menu. The default selects the first
+                    // heading element found in the slide, but you can specify any
+                    // valid css selector and the text from the first matching
+                    // element will be used.
+                    // Note: that a section data-menu-title attribute or an element
+                    // with a menu-title class will take precedence over this option
+                    titleSelector: 'h1, h2, h3, h4, h5, h6',
+
+                        // If slides do not have a matching title, attempt to use the
+                        // start of the text content as the title instead
+                        useTextContentForMissingTitles: false,
+
+                            // Hide slides from the menu that do not have a title.
+                            // Set to 'true' to only list slides with titles.
+                            hideMissingTitles: false,
+
+                                // Adds markers to the slide titles to indicate the 
+                                // progress through the presentation. Set to 'false'
+                                // to hide the markers.
+                                markers: true,
+
+                                    // Specify custom panels to be included in the menu, by
+                                    // providing an array of objects with 'title', 'icon'
+                                    // properties, and either a 'src' or 'content' property.
+                                    // custom: false,
+                                    custom: [],
+                                        // Specifies the themes that will be available in the themes
+                                        // menu panel. Set to 'true' to show the themes menu panel
+                                        // with the default themes list. Alternatively, provide an
+                                        // array to specify the themes to make available in the
+                                        // themes menu panel, for example...
+                                        // [
+                                        //     { name: 'Black', theme: 'css/theme/black.css' },
+                                        //     { name: 'White', theme: 'css/theme/white.css' },
+                                        //     { name: 'League', theme: 'css/theme/league.css' }
+                                        // ]
+                                        themes: false,
+
+                                            // Specifies the path to the default theme files. If your
+                                            // presentation uses a different path to the standard reveal
+                                            // layout then you need to provide this option, but only
+                                            // when 'themes' is set to 'true'. If you provide your own 
+                                            // list of themes or 'themes' is set to 'false' the 
+                                            // 'themesPath' option is ignored.
+                                            themesPath: 'css/theme/',
+
+                                                // Specifies if the transitions menu panel will be shown.
+                                                // Set to 'true' to show the transitions menu panel with
+                                                // the default transitions list. Alternatively, provide an
+                                                // array to specify the transitions to make available in
+                                                // the transitions panel, for example...
+                                                // ['None', 'Fade', 'Slide']
+                                                transitions: false,
+
+                                                    // Adds a menu button to the slides to open the menu panel.
+                                                    // Set to 'false' to hide the button.
+                                                    openButton: true,
+
+                                                        // If 'true' allows the slide number in the presentation to
+                                                        // open the menu panel. The reveal.js slideNumber option must 
+                                                        // be displayed for this to take effect
+                                                        openSlideNumber: false,
+
+                                                            // If true allows the user to open and navigate the menu using
+                                                            // the keyboard. Standard keyboard interaction with reveal
+                                                            // will be disabled while the menu is open.
+                                                            keyboard: true,
+
+                                                                // Normally the menu will close on user actions such as
+                                                                // selecting a menu item, or clicking the presentation area.
+                                                                // If 'true', the sticky option will leave the menu open
+                                                                // until it is explicitly closed, that is, using the close
+                                                                // button or pressing the ESC or m key (when the keyboard 
+                                                                // interaction option is enabled).
+                                                                sticky: false,
+
+                                                                    // If 'true' standard menu items will be automatically opened
+                                                                    // when navigating using the keyboard. Note: this only takes 
+                                                                    // effect when both the 'keyboard' and 'sticky' options are enabled.
+                                                                    autoOpen: true,
+
+                                                                        // If 'true' the menu will not be created until it is explicitly
+                                                                        // requested by calling RevealMenu.init(). Note this will delay
+                                                                        // the creation of all menu panels, including custom panels, and
+                                                                        // the menu button.
+                                                                        delayInit: false,
+
+                                                                            // If 'true' the menu will be shown when the menu is initialised.
+                                                                            openOnInit: false,
+
+                                                                                // By default the menu will load it's own font-awesome library
+                                                                                // icons. If your presentation needs to load a different
+                                                                                // font-awesome library the 'loadIcons' option can be set to false
+                                                                                // and the menu will not attempt to load the font-awesome library.
+                                                                                loadIcons: false
+    },
+    chalkboard: {
+        toggleChalkboardButton: { left: "60px", bottom: "30px", top: "auto", right: "auto" },
+        toggleNotesButton: { left: "90px", bottom: "30px", top: "auto", right: "auto" },
+
+    }
+    });
+
+
+
+</script>
+</body>
+
+</html>
