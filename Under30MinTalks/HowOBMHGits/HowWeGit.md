@@ -47,7 +47,8 @@ Free, Open Source, Universal; unlike TFS again which is locked down to Microsoft
 ## Before We Start
 
 - All code will be put up on my personal git
-
 https://github.com/niknudge/pres
 
-- This is a surface look at our development process, at just git _(and some cross over with SQL Clone &)
+- This will also be put up on Azure DevOps
+- This is a surface look at our development process, at just git _(and some cross over with SQL Clone & SQL Source Control)_
+- You can also return to this presentation [link tbc...]
