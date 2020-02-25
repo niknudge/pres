@@ -326,14 +326,184 @@ Free, Open Source, Universal; unlike TFS again which is locked down to Microsoft
             
             <h2><a id="user-content-before-we-start" class="anchor" href="#before-we-start" aria-hidden="true"></a>Before We Start</h2>
 <ul>
-<li>All code will be put up on my personal git</li>
-</ul>
-<p><a href="https://github.com/niknudge/pres">https://github.com/niknudge/pres</a></p>
-<ul>
-<li>This is a surface look at our development process, at just git _(and some cross over with SQL Clone &amp;)</li>
+<li>
+<p>All code will be put up on my personal git
+<a href="https://github.com/niknudge/pres">https://github.com/niknudge/pres</a></p>
+</li>
+<li>
+<p>This will also be put up on Azure DevOps</p>
+</li>
+<li>
+<p>This is a surface look at our development process, at just git <em>(and some cross over with SQL Clone &amp; SQL Source Control)</em></p>
+</li>
+<li>
+<p>You can also return to this presentation [link tbc…]</p>
+</li>
 </ul>
 
             </section>
+    
+
+
+
+    
+        <section >
+            
+            <h1><a id="user-content-getting-the-repo" class="anchor" href="#getting-the-repo" aria-hidden="true"></a>Getting the Repo</h1>
+<img src="res/AccessCloneRepo.gif" width="80%">
+<aside class="notes">
+For Azure DevOps, we can access the repo URL from the website<br>
+Just select the project you would like, use the bar on the left and<br>
+open up the orange menu item. When the page has loaded you can select<br>
+clone in the top left and you’re given a URL to copy. <a href="res/AccessCloneRepo.mp4">Video file can be<br>
+found at</a></aside>
+
+            </section>
+    
+
+
+
+    
+    <section>
+        <section >
+            <h1><a id="user-content-downloading-repo" class="anchor" href="#downloading-repo" aria-hidden="true"></a>Downloading Repo</h1>
+<h2><a id="user-content-visual-studio" class="anchor" href="#visual-studio" aria-hidden="true"></a>Visual Studio</h2>
+<p><img src="res/VSClone.png" alt="Visual Studio Clone"></p>
+
+            </section>
+        
+            <section >
+                <h1><a id="user-content-downloading-repo-1" class="anchor" href="#downloading-repo-1" aria-hidden="true"></a>Downloading Repo</h1>
+<h2><a id="user-content-cli" class="anchor" href="#cli" aria-hidden="true"></a>CLI</h2>
+<pre><code class="language-powershell">&gt; git clone https://OxfordHealthBI@dev.azure.com/OxfordHealthBI/OxfordHealthDW/_git/OxfordHealthDW
+</code></pre>
+
+            </section>
+        
+            <section >
+                <h1><a id="user-content-downloading-repo-2" class="anchor" href="#downloading-repo-2" aria-hidden="true"></a>Downloading Repo</h1>
+<h2><a id="user-content-sourcetree" class="anchor" href="#sourcetree" aria-hidden="true"></a>SourceTree</h2>
+<p><img src="res/STClone.png" alt="SourceTree Clone"></p>
+
+            </section>
+        
+            <section >
+                <h1><a id="user-content-downloading-repo-3" class="anchor" href="#downloading-repo-3" aria-hidden="true"></a>Downloading Repo</h1>
+<h2><a id="user-content-what-weve-done" class="anchor" href="#what-weve-done" aria-hidden="true"></a>What We’ve Done</h2>
+<aside class="notes">
+So what we’ve done is download the master codebase as well as the metadata behind what changes have <br>
+occurred and what changes are contained in other branches, which brings us to</aside>
+
+            </section>
+        
+
+    </section>
+    
+
+
+
+    
+    <section>
+        <section >
+            <h1><a id="user-content-branches" class="anchor" href="#branches" aria-hidden="true"></a>Branches</h1>
+<p><img src="res/BranchStatus.png" alt="Branch Status"></p>
+<aside class="notes">
+Branches are different states of the same codebase, we use the master branch to reflect the state of production<br>
+In this example we see that the release branch is 27 commits ahead. In the backend these two codebases are very<br>
+similar, the only difference is that the release branch contains a list of what rows have changed to what.</aside>
+
+            </section>
+        
+            <section >
+                <h1><a id="user-content-branching-stategies" class="anchor" href="#branching-stategies" aria-hidden="true"></a>Branching Stategies</h1>
+<p>We follow a method of branching named <strong>“Gitflow”</strong>, based on an initial <a href="https://nvie.com/posts/a-successful-git-branching-model/">blog post by nvie</a></p>
+<p>Which recommends 2 permanent branches; <code>master</code> and <code>develop</code> that reflect a production state and development state respectively</p>
+
+            </section>
+        
+            <section >
+                <h1><a id="user-content-gitflow" class="anchor" href="#gitflow" aria-hidden="true"></a>Gitflow</h1>
+<p><img src="https://www.nicepng.com/png/detail/321-3210678_release-branches-git-flow.png" alt="Gitflow Diagram"></p>
+<aside class="notes">
+Any new develop occurs in feature/ branches, this keeps any in progress development away from the current development<br>
+state. When development is complete, the code is merged back into develop</aside>
+
+            </section>
+        
+            <section >
+                <h1><a id="user-content-gitflow-1" class="anchor" href="#gitflow-1" aria-hidden="true"></a>Gitflow</h1>
+<ul>
+<li>New development occurs in <code>feature/</code> merged back into <code>develop</code></li>
+<li><code>release/</code> branched from develop, merged into <code>master</code> and back into <code>develop</code></li>
+</ul>
+
+            </section>
+        
+            <section >
+                <h1><a id="user-content-gitflow-tools" class="anchor" href="#gitflow-tools" aria-hidden="true"></a>Gitflow Tools</h1>
+<p>Gitflow is so popular that it has its own plugin for <code>git</code>. This allows you to simplify each of the common steps that occur in day to day development.</p>
+<pre><code class="language-powershell">&gt; git flow feature start  &lt;featurename&gt;
+&gt; git flow feature finish &lt;featurename&gt;
+</code></pre>
+
+            </section>
+        
+            <section >
+                <h1><a id="user-content-gitflow-tools-1" class="anchor" href="#gitflow-tools-1" aria-hidden="true"></a>Gitflow Tools</h1>
+<p>Gitflow is also built into many other tools</p>
+<p><img src="res/VSgitflow.png" width="30%" /> <img src="res/STgitflow.png" width="30%" /></p>
+<p>When we first clone a repository, we need to initiate with gitflow, the GUI tools prompt you to do this</p>
+<aside class="notes">
+for example there are buttons in SourceTree and Visual Studio that utilises gitflow in the GUI</aside>
+
+            </section>
+        
+
+    </section>
+    
+
+
+
+    
+        <section >
+            
+            
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            
+            </section>
+    
+
+
+
+    
+    <section>
+        <section >
+            <h1><a id="user-content-how-we-dont-do-it" class="anchor" href="#how-we-dont-do-it" aria-hidden="true"></a>How we don’t do it</h1>
+<h2><a id="user-content-branching-stategies-1" class="anchor" href="#branching-stategies-1" aria-hidden="true"></a>Branching stategies</h2>
+<p>Whilst <code>gitflow</code> is popular, it’s by no means perfect:</p>
+<ul>
+<li>Top level view can be confusing</li>
+<li>Easy to drift away from master branch</li>
+<li>Plugin makes it difficult/impossible to follow other git “best practices”</li>
+</ul>
+<p><a href="https://medium.com/@patrickporto/4-branching-workflows-for-git-30d0aaee7bf">Many articles</a> discuss the pros and cons of other stategies used commonly</p>
+
+            </section>
+        
+            <section >
+                <h2><a id="user-content-inbuilt-git-features" class="anchor" href="#inbuilt-git-features" aria-hidden="true"></a>Inbuilt git features</h2>
+
+            </section>
+        
+
+    </section>
     
 
 
