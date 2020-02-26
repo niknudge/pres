@@ -72,7 +72,7 @@ found at](res/AccessCloneRepo.mp4)
 
 ## Visual Studio
 
-![Visual Studio Clone](res/VSClone.png)
+<img src="res/VSClone.png" height="300" />
 
 --
 
@@ -90,7 +90,7 @@ found at](res/AccessCloneRepo.mp4)
 
 ## SourceTree
 
-![SourceTree Clone](res/STClone.png)
+<img src="res/STClone.png" height="300" />
 
 --
 
@@ -155,7 +155,7 @@ Gitflow is so popular that it has its own plugin for `git`. This allows you to s
 
 Gitflow is also built into many other tools
 
-<img src="res/VSgitflow.png" width="30%" /> <img src="res/STgitflow.png" width="30%" />
+<img src="res/VSgitflow.png" height="100" /> <img src="res/STgitflow.png" height="100" />
 
 When we first clone a repository, we need to initiate with gitflow, the GUI tools prompt you to do this
 
@@ -176,11 +176,16 @@ Whilst `gitflow` is popular, it's by no means perfect:
 
 - Top level view can be confusing
 - Easy to drift away from master branch
-- Plugin makes it difficult/impossible to follow other git "best practices"
+- Harder to follow other git "best practices"
 
 [Many articles](https://medium.com/@patrickporto/4-branching-workflows-for-git-30d0aaee7bf) discuss the pros and cons of other stategies used commonly
 
 --
 
-## Inbuilt git features
+## Pull Requests
 
+>Pull requests let you tell others about changes you've pushed to a GitHub repository. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.
+
+note:
+Pull requests are a common thing to see when exploring sites like [Github](https://www.github.com)<br>
+A way of creating discussion/review points before merging code changes into the base
