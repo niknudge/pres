@@ -172,6 +172,15 @@ same way. Notice at the bottom where the inputs are translated into the `git flo
 
 ---
 
+# Then what?
+
+1. Make Changes
+2. Create Commits
+3. Push Changes
+4. Repeat
+
+![Moss Code](https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif)
+
 ---
 
 # How we don't do it
