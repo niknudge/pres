@@ -164,7 +164,22 @@ for example there are buttons in SourceTree and Visual Studio that utilises gitf
 
 ---
 
+![Starting Feature](/res/gitflow.gif)
+
+note:
+Here's the basic process for creating a feature in VisualStudio, most other applications work in the <br>
+same way. Notice at the bottom where the inputs are translated into the `git flow` commands.
+
 ---
+
+# Then what?
+
+1. Make Changes
+2. Create Commits
+3. Push Changes
+4. Repeat
+
+![Moss Code](https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif)
 
 ---
 
