@@ -162,9 +162,72 @@ When we first clone a repository, we need to initiate with gitflow, the GUI tool
 note:
 for example there are buttons in SourceTree and Visual Studio that utilises gitflow in the GUI
 
----
+--
+
+![Starting Feature](/res/gitflow_startfeat.gif)
+
+note:
+Here's the basic process for creating a feature in VisualStudio, most other applications work in the <br>
+same way. Notice at the bottom where the inputs are translated into the `git flow` commands.
+
+--
+
+## Then what?
+
+1. Make Changes
+2. Create Commits
+3. Push Changes
+4. Repeat ... **KEEP CODING**
+
+![Moss Code](https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif)
+
+--
+
+![Finishing Feature](/res/gitflow_finishfeat.gif)
+
+note:
+Finishing a feature follows similar steps to creating a feature<br>
+click the usual buttons and it'll leave you with a commit that needs to be<br>
+pushed to the develop branch
+
+--
+
+# Releases
+
+Releases follows the `gitflow` process to merge development code into `master`
+
+Follows much of the same as creating and finishing features
+
+--
+
+# Except
+
+Finishing a feature leaves 2 sets of commits
+
+- One for `develop`
+- One for `master`
+
+This is to ensure that any codew changes that occur when people are looking at the release branch (i.e. UAT testing flagging bugs) are merged with both production and development systems
+
+--
+
+![Creating and Closing a Release]()
 
 ---
+
+# Pulling
+
+>Pulling is the defacto thing you should be doing if not developing
+
+Pulling lets your local copy of the code repository know what updates have been occuring on the repository
+
+--
+
+## It Doesn't matter where we pull from
+
+All pulls made, no matter the software, calls the git command & update the local codebase
+
+<img src="res/gitPull.png" height="350">
 
 ---
 
