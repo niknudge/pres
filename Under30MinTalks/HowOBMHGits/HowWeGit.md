@@ -51,7 +51,7 @@ https://github.com/niknudge/pres
 
 - This will also be put up on Azure DevOps
 - This is a surface look at our development process, at just git _(and some cross over with SQL Clone & SQL Source Control)_
-- You can also return to this presentation [link tbc...]
+- You can also return to this [presentation](https://agitated-sinoussi-27a07b.netlify.com/)
 
 ---
 
@@ -225,7 +225,7 @@ Finishing a feature leaves 2 sets of commits
 - One for `develop`
 - One for `master`
 
-This is to ensure that any codew changes that occur when people are looking at the release branch (i.e. UAT testing flagging bugs) are merged with both production and development systems
+This is to ensure that any code changes that occur when people are looking at the release branch (i.e. UAT testing flagging bugs) are merged with both production and development systems
 
 --
 
