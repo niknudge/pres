@@ -51,7 +51,7 @@ https://github.com/niknudge/pres
 
 - This will also be put up on Azure DevOps
 - This is a surface look at our development process, at just git _(and some cross over with SQL Clone & SQL Source Control)_
-- You can also return to this presentation [link tbc...]
+- You can also return to this [presentation](https://agitated-sinoussi-27a07b.netlify.com/)
 
 ---
 
@@ -101,6 +101,24 @@ found at](res/AccessCloneRepo.mp4)
 note:
 So what we've done is download the master codebase as well as the metadata behind what changes have <br>
 occurred and what changes are contained in other branches, which brings us to
+
+---
+
+## Common git Terms
+
+**Clone** - Download the codebase from repo
+
+**Pull** - Update local copy with changes on repo
+
+**Commit** - Bundle code changes with a message
+
+**Push** - Uploads commits to repo
+
+**Sync** _(VS Only)_ - Pulls, then Pushes
+
+**Branch** - Copy of codebase at a different state
+
+**Checkout** - Switch to a different branch
 
 ---
 
@@ -164,7 +182,7 @@ for example there are buttons in SourceTree and Visual Studio that utilises gitf
 
 --
 
-![Starting Feature](/res/gitflow_startfeat.gif)
+![Starting Feature](res/gitflow_startfeat.gif)
 
 note:
 Here's the basic process for creating a feature in VisualStudio, most other applications work in the <br>
@@ -183,7 +201,7 @@ same way. Notice at the bottom where the inputs are translated into the `git flo
 
 --
 
-![Finishing Feature](/res/gitflow_finishfeat.gif)
+![Finishing Feature](res/gitflow_finishfeat.gif)
 
 note:
 Finishing a feature follows similar steps to creating a feature<br>
@@ -207,11 +225,11 @@ Finishing a feature leaves 2 sets of commits
 - One for `develop`
 - One for `master`
 
-This is to ensure that any codew changes that occur when people are looking at the release branch (i.e. UAT testing flagging bugs) are merged with both production and development systems
+This is to ensure that any code changes that occur when people are looking at the release branch (i.e. UAT testing flagging bugs) are merged with both production and development systems
 
 --
 
-![Creating and Closing a Release]()
+![Creating and Closing a Release](res/gitflow_startfinishrelease.gif)
 
 ---
 
@@ -228,6 +246,60 @@ Pulling lets your local copy of the code repository know what updates have been 
 All pulls made, no matter the software, calls the git command & update the local codebase
 
 <img src="res/gitPull.png" height="350">
+
+note:
+Pushing works the same way, the applications call the command to update the repo
+
+---
+
+# How BI Do it with other tools
+
+Other things that fit in with our git workflow:
+
+- Redgate SQL Source Control
+- Redgate SQL Provision _(SQL Clone)_
+
+--
+
+# SQL Source Control
+
+Works as a go-between for the Database & the plaintext interpretation.
+
+<img src="res/sqlsourcecontrol.png" height="300">
+
+--
+
+# Be aware
+
+<img src="res/sqlsourcecontrollower.png" height="300">
+
+note:
+SQL Source control can get a bit confused when flicking between branches, it gets unsure about which version of a piece of code is more correct. When changing branch, ensure you apply any changes but also check the commit tab for other changes to undo.
+
+--
+
+# SQL Provision
+
+This gives up a database to work with
+
+note:
+Basically a snapshot of the production databases at last release, that can be restored as a local database.
+The data is stored on the Clone Server and only changes are stored locally, in an unreadable state.
+
+---
+
+# What we don't see
+
+
+When we use gitflow for `release/` & `hotfix/` branches, it will also create a tag with the same name (i.e `release/v2.8.0` creates a tag v2.8.0)
+
+These tags form points in the git history.
+
+![git tags](res/gitTagging.png)
+
+note:
+We can use this to get code showing the state of production at a particular version; also looking between 2 tags, we can see what has occurred between them.
+We can also provide a tag message if we'd like
 
 ---
 
@@ -252,3 +324,19 @@ Whilst `gitflow` is popular, it's by no means perfect:
 note:
 Pull requests are a common thing to see when exploring sites like [Github](https://www.github.com)<br>
 A way of creating discussion/review points before merging code changes into the base
+
+---
+
+# More in-depth
+
+Github provides a very large [Learning Lab](https://lab.github.com/) that'll reinforce the base concepts as well as more advanced stuff
+
+Atlassian provides a [clear overview](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) of the gitflow process as well
+
+---
+
+# Many Thanks
+
+## Questions?
+
+![Puppies](https://media.giphy.com/media/nD2ijrS939yjm/giphy.gif)
