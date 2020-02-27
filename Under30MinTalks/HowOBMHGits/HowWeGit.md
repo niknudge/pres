@@ -104,6 +104,24 @@ occurred and what changes are contained in other branches, which brings us to
 
 ---
 
+## Common git Terms
+
+**Clone** - Download the codebase from repo
+
+**Pull** - Update local copy with changes on repo
+
+**Commit** - Bundle code changes with a message
+
+**Push** - Uploads commits to repo
+
+**Sync** _(VS Only)_ - Pulls, then Pushes
+
+**Branch** - Copy of codebase at a different state
+
+**Checkout** - Switch to a different branch
+
+---
+
 # Branches
 
 ![Branch Status](res/BranchStatus.png)
@@ -229,6 +247,60 @@ All pulls made, no matter the software, calls the git command & update the local
 
 <img src="res/gitPull.png" height="350">
 
+note:
+Pushing works the same way, the applications call the command to update the repo
+
+---
+
+# How BI Do it with other tools
+
+Other things that fit in with our git workflow:
+
+- Redgate SQL Source Control
+- Redgate SQL Provision _(SQL Clone)_
+
+--
+
+# SQL Source Control
+
+Works as a go-between for the Database & the plaintext interpretation.
+
+<img src="res/sqlsourcecontrol.png" height="300">
+
+--
+
+# Be aware
+
+<img src="res/sqlsourcecontrollower.png" height="300">
+
+note:
+SQL Source control can get a bit confused when flicking between branches, it gets unsure about which version of a piece of code is more correct. When changing branch, ensure you apply any changes but also check the commit tab for other changes to undo.
+
+--
+
+# SQL Provision
+
+This gives up a database to work with
+
+note:
+Basically a snapshot of the production databases at last release, that can be restored as a local database.
+The data is stored on the Clone Server and only changes are stored locally, in an unreadable state.
+
+---
+
+# What we don't see
+
+
+When we use gitflow for `release/` & `hotfix/` branches, it will also create a tag with the same name (i.e `release/v2.8.0` creates a tag v2.8.0)
+
+These tags form points in the git history.
+
+![git tags](res/gitTagging.png)
+
+note:
+We can use this to get code showing the state of production at a particular version; also looking between 2 tags, we can see what has occurred between them.
+We can also provide a tag message if we'd like
+
 ---
 
 # How we don't do it
@@ -252,3 +324,19 @@ Whilst `gitflow` is popular, it's by no means perfect:
 note:
 Pull requests are a common thing to see when exploring sites like [Github](https://www.github.com)<br>
 A way of creating discussion/review points before merging code changes into the base
+
+---
+
+# More in-depth
+
+Github provides a very large [Learning Lab](https://lab.github.com/) that'll reinforce the base concepts as well as more advanced stuff
+
+Atlassian provides a [clear overview](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) of the gitflow process as well
+
+---
+
+# Many Thanks
+
+## Questions?
+
+![Puppies](https://media.giphy.com/media/nD2ijrS939yjm/giphy.gif)
