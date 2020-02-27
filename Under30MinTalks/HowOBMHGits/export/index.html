@@ -337,7 +337,7 @@ Free, Open Source, Universal; unlike TFS again which is locked down to Microsoft
 <p>This is a surface look at our development process, at just git <em>(and some cross over with SQL Clone &amp; SQL Source Control)</em></p>
 </li>
 <li>
-<p>You can also return to this presentation [link tbc…]</p>
+<p>You can also return to this <a href="https://agitated-sinoussi-27a07b.netlify.com/">presentation</a></p>
 </li>
 </ul>
 
@@ -368,7 +368,7 @@ found at</a></aside>
         <section >
             <h1><a id="user-content-downloading-repo" class="anchor" href="#downloading-repo" aria-hidden="true"></a>Downloading Repo</h1>
 <h2><a id="user-content-visual-studio" class="anchor" href="#visual-studio" aria-hidden="true"></a>Visual Studio</h2>
-<p><img src="res/VSClone.png" alt="Visual Studio Clone"></p>
+<img src="res/VSClone.png" height="300" />
 
             </section>
         
@@ -383,7 +383,7 @@ found at</a></aside>
             <section >
                 <h1><a id="user-content-downloading-repo-2" class="anchor" href="#downloading-repo-2" aria-hidden="true"></a>Downloading Repo</h1>
 <h2><a id="user-content-sourcetree" class="anchor" href="#sourcetree" aria-hidden="true"></a>SourceTree</h2>
-<p><img src="res/STClone.png" alt="SourceTree Clone"></p>
+<img src="res/STClone.png" height="300" />
 
             </section>
         
@@ -398,6 +398,23 @@ occurred and what changes are contained in other branches, which brings us to</a
         
 
     </section>
+    
+
+
+
+    
+        <section >
+            
+            <h2><a id="user-content-common-git-terms" class="anchor" href="#common-git-terms" aria-hidden="true"></a>Common git Terms</h2>
+<p><strong>Clone</strong> - Download the codebase from repo</p>
+<p><strong>Pull</strong> - Update local copy with changes on repo</p>
+<p><strong>Commit</strong> - Bundle code changes with a message</p>
+<p><strong>Push</strong> - Uploads commits to repo</p>
+<p><strong>Sync</strong> <em>(VS Only)</em> - Pulls, then Pushes</p>
+<p><strong>Branch</strong> - Copy of codebase at a different state</p>
+<p><strong>Checkout</strong> - Switch to a different branch</p>
+
+            </section>
     
 
 
@@ -451,10 +468,130 @@ state. When development is complete, the code is merged back into develop</aside
             <section >
                 <h1><a id="user-content-gitflow-tools-1" class="anchor" href="#gitflow-tools-1" aria-hidden="true"></a>Gitflow Tools</h1>
 <p>Gitflow is also built into many other tools</p>
-<p><img src="res/VSgitflow.png" width="30%" /> <img src="res/STgitflow.png" width="30%" /></p>
+<p><img src="res/VSgitflow.png" height="100" /> <img src="res/STgitflow.png" height="100" /></p>
 <p>When we first clone a repository, we need to initiate with gitflow, the GUI tools prompt you to do this</p>
 <aside class="notes">
 for example there are buttons in SourceTree and Visual Studio that utilises gitflow in the GUI</aside>
+
+            </section>
+        
+            <section >
+                <p><img src="res/gitflow_startfeat.gif" alt="Starting Feature"></p>
+<aside class="notes">
+Here’s the basic process for creating a feature in VisualStudio, most other applications work in the <br>
+same way. Notice at the bottom where the inputs are translated into the <code>git flow</code> commands.</aside>
+
+            </section>
+        
+            <section >
+                <h2><a id="user-content-then-what" class="anchor" href="#then-what" aria-hidden="true"></a>Then what?</h2>
+<ol>
+<li>Make Changes</li>
+<li>Create Commits</li>
+<li>Push Changes</li>
+<li>Repeat … <strong>KEEP CODING</strong></li>
+</ol>
+<p><img src="https://media.giphy.com/media/13HgwGsXF0aiGY/giphy.gif" alt="Moss Code"></p>
+
+            </section>
+        
+            <section >
+                <p><img src="res/gitflow_finishfeat.gif" alt="Finishing Feature"></p>
+<aside class="notes">
+Finishing a feature follows similar steps to creating a feature<br>
+click the usual buttons and it’ll leave you with a commit that needs to be<br>
+pushed to the develop branch</aside>
+
+            </section>
+        
+            <section >
+                <h1><a id="user-content-releases" class="anchor" href="#releases" aria-hidden="true"></a>Releases</h1>
+<p>Releases follows the <code>gitflow</code> process to merge development code into <code>master</code></p>
+<p>Follows much of the same as creating and finishing features</p>
+
+            </section>
+        
+            <section >
+                <h1><a id="user-content-except" class="anchor" href="#except" aria-hidden="true"></a>Except</h1>
+<p>Finishing a feature leaves 2 sets of commits</p>
+<ul>
+<li>One for <code>develop</code></li>
+<li>One for <code>master</code></li>
+</ul>
+<p>This is to ensure that any code changes that occur when people are looking at the release branch (i.e. UAT testing flagging bugs) are merged with both production and development systems</p>
+
+            </section>
+        
+            <section >
+                <p><img src="res/gitflow_startfinishrelease.gif" alt="Creating and Closing a Release"></p>
+
+            </section>
+        
+
+    </section>
+    
+
+
+
+    
+    <section>
+        <section >
+            <h1><a id="user-content-pulling" class="anchor" href="#pulling" aria-hidden="true"></a>Pulling</h1>
+<blockquote>
+<p>Pulling is the defacto thing you should be doing if not developing</p>
+</blockquote>
+<p>Pulling lets your local copy of the code repository know what updates have been occuring on the repository</p>
+
+            </section>
+        
+            <section >
+                <h2><a id="user-content-it-doesnt-matter-where-we-pull-from" class="anchor" href="#it-doesnt-matter-where-we-pull-from" aria-hidden="true"></a>It Doesn’t matter where we pull from</h2>
+<p>All pulls made, no matter the software, calls the git command &amp; update the local codebase</p>
+<img src="res/gitPull.png" height="350">
+<aside class="notes">
+Pushing works the same way, the applications call the command to update the repo</aside>
+
+            </section>
+        
+
+    </section>
+    
+
+
+
+    
+    <section>
+        <section >
+            <h1><a id="user-content-how-bi-do-it-with-other-tools" class="anchor" href="#how-bi-do-it-with-other-tools" aria-hidden="true"></a>How BI Do it with other tools</h1>
+<p>Other things that fit in with our git workflow:</p>
+<ul>
+<li>Redgate SQL Source Control</li>
+<li>Redgate SQL Provision <em>(SQL Clone)</em></li>
+</ul>
+
+            </section>
+        
+            <section >
+                <h1><a id="user-content-sql-source-control" class="anchor" href="#sql-source-control" aria-hidden="true"></a>SQL Source Control</h1>
+<p>Works as a go-between for the Database &amp; the plaintext interpretation.</p>
+<img src="res/sqlsourcecontrol.png" height="300">
+
+            </section>
+        
+            <section >
+                <h1><a id="user-content-be-aware" class="anchor" href="#be-aware" aria-hidden="true"></a>Be aware</h1>
+<img src="res/sqlsourcecontrollower.png" height="300">
+<aside class="notes">
+SQL Source control can get a bit confused when flicking between branches, it gets unsure about which version of a piece of code is more correct. When changing branch, ensure you apply any changes but also check the commit tab for other changes to undo.</aside>
+
+            </section>
+        
+            <section >
+                <h1><a id="user-content-sql-provision" class="anchor" href="#sql-provision" aria-hidden="true"></a>SQL Provision</h1>
+<p>This gives up a database to work with</p>
+<aside class="notes">
+Basically a snapshot of the production databases at last release, that can be restored as a local database.
+The data is stored on the Clone Server and only changes are stored locally, in an unreadable state.</aside>
 
             </section>
         
@@ -467,16 +604,14 @@ for example there are buttons in SourceTree and Visual Studio that utilises gitf
     
         <section >
             
-            
-            </section>
-    
+            <h1><a id="user-content-what-we-dont-see" class="anchor" href="#what-we-dont-see" aria-hidden="true"></a>What we don’t see</h1>
+<p>When we use gitflow for <code>release/</code> &amp; <code>hotfix/</code> branches, it will also create a tag with the same name (i.e <code>release/v2.8.0</code> creates a tag v2.8.0)</p>
+<p>These tags form points in the git history.</p>
+<p><img src="res/gitTagging.png" alt="git tags"></p>
+<aside class="notes">
+We can use this to get code showing the state of production at a particular version; also looking between 2 tags, we can see what has occurred between them.
+We can also provide a tag message if we’d like</aside>
 
-
-
-    
-        <section >
-            
-            
             </section>
     
 
@@ -491,19 +626,49 @@ for example there are buttons in SourceTree and Visual Studio that utilises gitf
 <ul>
 <li>Top level view can be confusing</li>
 <li>Easy to drift away from master branch</li>
-<li>Plugin makes it difficult/impossible to follow other git “best practices”</li>
+<li>Harder to follow other git “best practices”</li>
 </ul>
 <p><a href="https://medium.com/@patrickporto/4-branching-workflows-for-git-30d0aaee7bf">Many articles</a> discuss the pros and cons of other stategies used commonly</p>
 
             </section>
         
             <section >
-                <h2><a id="user-content-inbuilt-git-features" class="anchor" href="#inbuilt-git-features" aria-hidden="true"></a>Inbuilt git features</h2>
+                <h2><a id="user-content-pull-requests" class="anchor" href="#pull-requests" aria-hidden="true"></a>Pull Requests</h2>
+<blockquote>
+<p>Pull requests let you tell others about changes you’ve pushed to a GitHub repository. Once a pull request is sent, interested parties can review the set of changes, discuss potential modifications, and even push follow-up commits if necessary.</p>
+</blockquote>
+<aside class="notes">
+Pull requests are a common thing to see when exploring sites like <a href="https://www.github.com">Github</a><br>
+A way of creating discussion/review points before merging code changes into the base</aside>
 
             </section>
         
 
     </section>
+    
+
+
+
+    
+        <section >
+            
+            <h1><a id="user-content-more-in-depth" class="anchor" href="#more-in-depth" aria-hidden="true"></a>More in-depth</h1>
+<p>Github provides a very large <a href="https://lab.github.com/">Learning Lab</a> that’ll reinforce the base concepts as well as more advanced stuff</p>
+<p>Atlassian provides a <a href="https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow">clear overview</a> of the gitflow process as well</p>
+
+            </section>
+    
+
+
+
+    
+        <section >
+            
+            <h1><a id="user-content-many-thanks" class="anchor" href="#many-thanks" aria-hidden="true"></a>Many Thanks</h1>
+<h2><a id="user-content-questions" class="anchor" href="#questions" aria-hidden="true"></a>Questions?</h2>
+<p><img src="https://media.giphy.com/media/nD2ijrS939yjm/giphy.gif" alt="Puppies"></p>
+
+            </section>
     
 
 
@@ -540,10 +705,10 @@ for example there are buttons in SourceTree and Visual Studio that utilises gitf
         help: true,
         showNotes: false,
         autoPlayMedia: false,
-        autoSlide: 15000,
+        autoSlide: 0,
         autoSlideStoppable: true,
         autoSlideMethod: Reveal.navigateNext,
-        defaultTiming: 15,
+        defaultTiming: 120,
         mouseWheel: false,
         hideAddressBar: true,
         previewLinks: false,
