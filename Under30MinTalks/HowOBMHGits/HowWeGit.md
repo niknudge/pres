@@ -211,7 +211,7 @@ This is to ensure that any codew changes that occur when people are looking at t
 
 --
 
-![Creating and Closing a Release]()
+![Creating and Closing a Release](res/gitflow_startfinishrelease.gif)
 
 ---
 
