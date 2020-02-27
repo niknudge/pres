@@ -182,7 +182,7 @@ for example there are buttons in SourceTree and Visual Studio that utilises gitf
 
 --
 
-![Starting Feature](/res/gitflow_startfeat.gif)
+![Starting Feature](res/gitflow_startfeat.gif)
 
 note:
 Here's the basic process for creating a feature in VisualStudio, most other applications work in the <br>
@@ -201,7 +201,7 @@ same way. Notice at the bottom where the inputs are translated into the `git flo
 
 --
 
-![Finishing Feature](/res/gitflow_finishfeat.gif)
+![Finishing Feature](res/gitflow_finishfeat.gif)
 
 note:
 Finishing a feature follows similar steps to creating a feature<br>
